@@ -1,5 +1,6 @@
 import { spreadRest, spreadRemix, spreadObject, spreadJumlah, spreadSisa, spreadObejctSisa, deletePassword, cloneArrayObject } from "./spread/spread-rest.js";
 import { spreadGabungan, spreadGabungObject, spreadUpdateAtribut, spreadHapusProperty, spreadTambahProperty, spreadCloneProperty, spreadJumlahAngka, spreadAmbilSisaObject, addToCartTest } from "./spread/spreadTest.js";
+import { destructurObjectDasar } from "./destructuring/latDestructuring.js";
 
 // spreadRest();
 // spreadRemix();
@@ -10,12 +11,14 @@ import { spreadGabungan, spreadGabungObject, spreadUpdateAtribut, spreadHapusPro
 // deletePassword();
 // cloneArrayObject();
 
-spreadGabungan();
-spreadGabungObject();
-spreadUpdateAtribut();
-spreadHapusProperty();
-spreadTambahProperty();
-spreadCloneProperty();
-spreadJumlahAngka();
-spreadAmbilSisaObject();
-addToCartTest();
+// spreadGabungan();
+// spreadGabungObject();
+// spreadUpdateAtribut();
+// spreadHapusProperty();
+// spreadTambahProperty();
+// spreadCloneProperty();
+// spreadJumlahAngka();
+// spreadAmbilSisaObject();
+// addToCartTest();
+
+destructurObjectDasar();
