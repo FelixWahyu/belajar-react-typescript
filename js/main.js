@@ -1,5 +1,5 @@
 import { spreadRest, spreadRemix, spreadObject, spreadJumlah, spreadSisa, spreadObejctSisa, deletePassword, cloneArrayObject } from "./spread/spread-rest.js";
-import { spreadGabungan, spreadGabungObject, spreadUpdateAtribut } from "./spread/spreadTest.js";
+import { spreadGabungan, spreadGabungObject, spreadUpdateAtribut, spreadHapusProperty, spreadTambahProperty, spreadCloneProperty, spreadJumlahAngka, spreadAmbilSisaObject, addToCartTest } from "./spread/spreadTest.js";
 
 // spreadRest();
 // spreadRemix();
@@ -13,3 +13,9 @@ import { spreadGabungan, spreadGabungObject, spreadUpdateAtribut } from "./sprea
 spreadGabungan();
 spreadGabungObject();
 spreadUpdateAtribut();
+spreadHapusProperty();
+spreadTambahProperty();
+spreadCloneProperty();
+spreadJumlahAngka();
+spreadAmbilSisaObject();
+addToCartTest();
