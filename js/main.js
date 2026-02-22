@@ -2,6 +2,7 @@ import { spreadRest, spreadRemix, spreadObject, spreadJumlah, spreadSisa, spread
 import { spreadGabungan, spreadGabungObject, spreadUpdateAtribut, spreadHapusProperty, spreadTambahProperty, spreadCloneProperty, spreadJumlahAngka, spreadAmbilSisaObject, addToCartTest } from "./spread/spreadTest.js";
 import destructurObjectDasar from "./destructuring/latDestructuring.js";
 import { domHtml } from "./dom/app.js";
+import newPromise from "../promiseAsyncAwait/promise.js";
 
 // spreadRest();
 // spreadRemix();
@@ -21,5 +22,8 @@ import { domHtml } from "./dom/app.js";
 // spreadJumlahAngka();
 // spreadAmbilSisaObject();
 // addToCartTest();
+
+// destructurObjectDasar();
+
 domHtml();
-destructurObjectDasar();
+newPromise();
