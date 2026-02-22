@@ -62,6 +62,87 @@ const newPromise = () => {
   };
 
   tampilData();
+
+  const getUser = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          id: 1,
+          nama: "Felix",
+          kota: "Purwokerto",
+        });
+      }, 1000);
+    });
+  };
+
+  const tampilUser = async () => {
+    const getData = await getUser();
+    console.log(getData.nama);
+  };
+
+  tampilUser();
+
+  const users = () => new Promise((resolve, reject) => setTimeout(() => resolve("Data Users"), 2000));
+
+  const product = () => new Promise((resolve, reject) => setTimeout(() => resolve("Data Products"), 2000));
+
+  // const getAllData = async () => {
+  //   const fetchUser = await users();
+  //   const fetchProduct = await product();
+
+  //   console.log(fetchUser, fetchProduct);
+  // };
+
+  const getAllData = async () => {
+    const [fetchUser, fetchProduct] = await Promise.all([users(), product()]);
+
+    console.log(fetchUser, fetchProduct);
+  };
+
+  getAllData();
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const jalan = async () => {
+    console.log("Mulai");
+    await delay(2000);
+    console.log("Selesai");
+  };
+
+  jalan();
+
+  const fetchDataUsers = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+    console.log(data);
+  };
+
+  fetchDataUsers();
+
+  const getNumber = async () => {
+    return 10;
+  };
+
+  getNumber().then(console.log);
+
+  const getUserAndPosts = async () => {
+    try {
+      const responseUser = await fetch("https://jsonplaceholder.typicode.com/users/1");
+      const userData = await responseUser.json();
+
+      const responsePost = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userData.id}`);
+      const postData = await responsePost.json();
+
+      const userPosts = { ...userData, postData };
+
+      console.log(userPosts);
+      return userPosts;
+    } catch (error) {
+      console.log("Error :", error);
+    }
+  };
+
+  getUserAndPosts();
 };
 
 export default newPromise;
