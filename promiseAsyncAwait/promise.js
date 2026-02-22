@@ -126,23 +126,66 @@ const newPromise = () => {
   getNumber().then(console.log);
 
   const getUserAndPosts = async () => {
+    // try {
+    //   const responseUser = await fetch("https://jsonplaceholder.typicode.com/users/1");
+    //   const userData = await responseUser.json();
+
+    //   const responsePost = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userData.id}`);
+    //   const postData = await responsePost.json();
+
+    //   const userPosts = { ...userData, postData };
+
+    //   console.log(userPosts);
+    //   return userPosts;
+    // } catch (error) {
+    //   console.log("Error :", error);
+    // }
+
+    const responseUser = await fetch("https://jsonplaceholder.typicode.com/users/1")
+      .then((res) => res.json())
+      .catch((err) => console.log("Error :", err));
+
+    const responsePost = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${responseUser.id}`)
+      .then((res) => res.json())
+      .catch((err) => console.log("Error :", err));
+
+    const hasil = { ...responseUser, responsePost };
+
+    console.log(hasil);
+    return hasil;
+  };
+
+  getUserAndPosts();
+
+  const getUserPostComments = async () => {
     try {
-      const responseUser = await fetch("https://jsonplaceholder.typicode.com/users/1");
-      const userData = await responseUser.json();
+      const responseUser = await fetch("https://jsonplaceholder.typicode.com/users/2");
+      const user = await responseUser.json();
 
-      const responsePost = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userData.id}`);
-      const postData = await responsePost.json();
+      const responsePost = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`);
+      const posts = await responsePost.json();
 
-      const userPosts = { ...userData, postData };
+      const postWithComment = await Promise.all(
+        posts.map(async (post) => {
+          const responseComment = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${post.id}`);
+          const comments = await responseComment.json();
 
-      console.log(userPosts);
-      return userPosts;
+          const hasil = { ...posts, comments };
+
+          return hasil;
+        }),
+      );
+
+      const result = { ...user, posts: postWithComment };
+
+      console.log(result);
+      return result;
     } catch (error) {
       console.log("Error :", error);
     }
   };
 
-  getUserAndPosts();
+  getUserPostComments();
 };
 
 export default newPromise;
