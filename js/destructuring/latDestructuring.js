@@ -1,4 +1,4 @@
-export const destructurObjectDasar = () => {
+const destructurObjectDasar = () => {
   const users = {
     id: 1,
     nama: "Felix",
@@ -71,3 +71,5 @@ export const destructurObjectDasar = () => {
 
   console.log(getInfo);
 };
+
+export default destructurObjectDasar;
