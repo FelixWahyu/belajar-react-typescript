@@ -186,6 +186,56 @@ const newPromise = () => {
   };
 
   getUserPostComments();
+
+  const getDataUsers = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          id: 1,
+          nama: "Felix",
+          umur: 22,
+        });
+      }, 1000);
+    });
+  };
+
+  const getDataPosts = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve([
+          {
+            id: 1,
+            title: "Posts 1",
+          },
+          {
+            id: 2,
+            title: "Posts 2",
+          },
+        ]);
+      }, 1500);
+    });
+  };
+
+  const getDataStats = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ follower: 120, following: 50 });
+      }, 800);
+    });
+  };
+
+  const getDashboardData = async () => {
+    try {
+      const [users, posts, stats] = await Promise.all([getDataUsers(), getDataPosts(), getDataStats()]);
+
+      return { users, posts, stats };
+    } catch (error) {
+      console.log("Error :", error);
+      throw error;
+    }
+  };
+
+  getDashboardData().then((res) => console.log(res));
 };
 
 export default newPromise;

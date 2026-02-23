@@ -3,6 +3,7 @@ import { spreadGabungan, spreadGabungObject, spreadUpdateAtribut, spreadHapusPro
 import destructurObjectDasar from "./destructuring/latDestructuring.js";
 import { domHtml } from "./dom/app.js";
 import newPromise from "../promiseAsyncAwait/promise.js";
+import createArrayMethod from "./arrayMethod/arrayMethod.js";
 
 // spreadRest();
 // spreadRemix();
@@ -26,4 +27,5 @@ import newPromise from "../promiseAsyncAwait/promise.js";
 // destructurObjectDasar();
 
 domHtml();
-newPromise();
+// newPromise();
+createArrayMethod();
