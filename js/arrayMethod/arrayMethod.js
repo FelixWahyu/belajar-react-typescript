@@ -95,6 +95,77 @@ const createArrayMethod = () => {
   }, 0);
 
   console.log(totalPendapatan);
+
+  const cart = [
+    { id: 1, name: "Laptop", price: 10000, qty: 1 },
+    { id: 2, name: "Mouse", price: 500, qty: 2 },
+    { id: 3, name: "Keyboard", price: 1500, qty: 1 },
+  ];
+
+  const totalBelanja = cart.map((item) => item.price * item.qty).reduce((total, item) => total + item, 0);
+  const sumOrder = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  console.log(totalBelanja);
+  console.log(sumOrder);
+
+  const getProduct = cart.filter((item) => item.price > 1000);
+  console.log(getProduct);
+
+  const totalPrice = cart.map((item) => {
+    const subtotal = item.price * item.qty;
+
+    return { ...item, subtotal };
+  });
+
+  console.log(totalPrice);
+
+  const groupProduct = cart.reduce(
+    (acc, item) => {
+      if (item.price > 2000) {
+        acc.mahal.push(item);
+      } else {
+        acc.murah.push(item);
+      }
+
+      return acc;
+    },
+    { mahal: [], murah: [] },
+  );
+
+  console.log(groupProduct);
+
+  const productQty = cart.reduce((max, item) => {
+    return item.qty > max.qty ? item : max;
+  }, cart[0]);
+
+  console.log(productQty);
+
+  const pesanan = [
+    { id: 1, items: ["Laptop", "Mouse"] },
+    { id: 2, items: ["Keyboard"] },
+  ];
+
+  const semuaItems = pesanan.reduce((acc, order) => {
+    return [...acc, ...order.items];
+  }, []);
+
+  console.log(semuaItems);
+
+  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  const sumQty = cart.map((item) => item.qty).reduce((total, item) => total + item, 0);
+  console.log(totalQty);
+  console.log(sumQty);
+
+  const items = ["Laptop", "Mouse", "Laptop", "Keyboard", "Monitor", "Mouse"];
+
+  const deleteDuplicate = items.reduce((acc, item) => {
+    if (!acc.includes(item)) {
+      acc.push(item);
+    }
+
+    return acc;
+  }, []);
+
+  console.log(deleteDuplicate);
 };
 
 export default createArrayMethod;
