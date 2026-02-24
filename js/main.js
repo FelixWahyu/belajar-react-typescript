@@ -1,8 +1,8 @@
 import { spreadRest, spreadRemix, spreadObject, spreadJumlah, spreadSisa, spreadObejctSisa, deletePassword, cloneArrayObject } from "./spread/spread-rest.js";
 import { spreadGabungan, spreadGabungObject, spreadUpdateAtribut, spreadHapusProperty, spreadTambahProperty, spreadCloneProperty, spreadJumlahAngka, spreadAmbilSisaObject, addToCartTest } from "./spread/spreadTest.js";
 import destructurObjectDasar from "./destructuring/latDestructuring.js";
-import { domHtml } from "./dom/app.js";
-import newPromise from "../promiseAsyncAwait/promise.js";
+import domHtml from "./dom/app.js";
+import newPromise from "./promiseAsyncAwait/promise.js";
 import createArrayMethod from "./arrayMethod/arrayMethod.js";
 import { addToCart, getTotalCart, getUserId, getUsers, removeFromCart } from "./importExport/importExport.js";
 
@@ -66,7 +66,6 @@ console.log("Pesanan Anda :", cart);
 console.log("Total :", getTotalCart(cart));
 
 const data = await getUsers();
-
 console.log(data);
 
 const userId = await getUserId(2);

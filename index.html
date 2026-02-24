@@ -3,16 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Belajar React TypeScript</title>
   </head>
   <body>
-    <section>
+    <section class="section-content">
       <div>
         <h3 class="title"></h3>
         <p class="subtitle"></p>
       </div>
+
+      <div class="list-content">
+        <ul id="content" class="list"></ul>
+      </div>
+
       <div>
-        <ul id="content"></ul>
+        <form id="form">
+          <div class="group-form">
+            <label for="formInput" class="form-label">Masukan List :</label>
+            <input type="text" id="formInput" name="formInput" class="input-form" />
+          </div>
+          <button id="submitBtn" class="btn-tambah" name="submitBtn" type="submit">Tambah</button>
+        </form>
       </div>
     </section>
     <script type="module" src="./js/main.js"></script>

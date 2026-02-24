@@ -1,0 +1,44 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.section-content {
+  padding: 2rem 4rem 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: light;
+  margin: 0 0 1rem 0;
+}
+
+.list-content {
+  margin: 0 0 1.5rem 0;
+}
+
+.form-label {
+  font-weight: bold;
+  display: block;
+}
+
+.input-form {
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.btn-tambah {
+  margin: 0.5rem 0 0 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: skyblue;
+  cursor: pointer;
+}
