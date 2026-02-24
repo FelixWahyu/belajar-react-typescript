@@ -27,12 +27,21 @@ import { addToCart, getTotalCart, getUserId, getUsers, removeFromCart } from "./
 
 // destructurObjectDasar();
 
-const { render, addList, selesaikan } = domHtml();
+const { render, addList, selesaikan, filterSelesai, filterBelum } = domHtml();
+
+const btnFilterSelesai = document.getElementById("filterSelesai");
+const btnFilterBelum = document.getElementById("filterBelum");
+const btnSemua = document.getElementById("btnSemua");
+
+btnFilterSelesai.addEventListener("click", filterSelesai);
+btnFilterBelum.addEventListener("click", filterBelum);
+btnSemua.addEventListener("click", () => render());
 
 selesaikan(1);
 
 // newPromise();
 // createArrayMethod();
+
 let cart = [];
 
 cart = addToCart(cart, {

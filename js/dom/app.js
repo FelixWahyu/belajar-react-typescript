@@ -16,27 +16,17 @@ export const domHtml = () => {
   titleH3.innerHTML = title;
   subTitle.innerHTML = subTitleContent;
 
-  const contentBelajar = () => {
-    try {
-      const respon = listMateri.map((materi) => {
+  const render = (data = listMateri) => {
+    sectionContent.innerHTML = data
+      .map((materi) => {
         return `<li>${materi.text} - ${materi.selesai ? "Selesai" : "Belum"}</li>`;
-      });
-      return respon.join("");
-    } catch (error) {
-      console.log(error);
-    }
+      })
+      .join("");
   };
-
-  const render = () => {
-    const materiBelajar = contentBelajar();
-    sectionContent.innerHTML = materiBelajar;
-  };
-
-  render();
 
   const addList = (event) => {
     event.preventDefault();
-    const data = formInput.value;
+    const data = formInput.value.trim();
 
     if (!data) return;
 
@@ -47,12 +37,24 @@ export const domHtml = () => {
     render();
   };
 
-  form.addEventListener("submit", addList);
+  form?.addEventListener("submit", addList);
 
   const selesaikan = (id) => {
     listMateri = listMateri.map((todo) => (todo.id === id ? { ...todo, selesai: true } : todo));
     render();
   };
 
-  return { render, addList, selesaikan };
+  const filterSelesai = () => {
+    const sudahSelesai = listMateri.filter((todo) => todo.selesai);
+    render(sudahSelesai);
+  };
+
+  const filterBelum = () => {
+    const belumSelesai = listMateri.filter((todo) => !todo.selesai);
+    render(belumSelesai);
+  };
+
+  render();
+
+  return { render, addList, selesaikan, filterSelesai, filterBelum };
 };
