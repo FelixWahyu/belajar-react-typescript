@@ -1,15 +1,17 @@
 import { methodUsers } from "./importExport/usersService.js";
 
-const { getAllUsers } = methodUsers();
+const { getAllUsers, getUserId } = methodUsers();
+
+const listContent = document.getElementById("content-users");
+const userDetail = document.getElementById("user-detail");
 
 const getUsersData = async () => {
-  const listContent = document.getElementById("content-users");
   listContent.innerHTML = "<li>Load data...</li>";
 
   try {
     const data = await getAllUsers();
 
-    if (!data || data.lenght === 0) {
+    if (!data || data.length === 0) {
       listContent.innerHTML = "<li>Tidak ada data users</li>";
       return;
     }
@@ -18,6 +20,9 @@ const getUsersData = async () => {
       .map((user) => {
         return `<li>
         ${user.name}
+        <a href="/users/userDetail.html?id=${user.id}" class="btn-detail">
+           <button>Detail</button>
+        </a>
         </li>`;
       })
       .join("");
@@ -29,4 +34,33 @@ const getUsersData = async () => {
   }
 };
 
-getUsersData();
+const getUserWithId = async () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) {
+    userDetail.innerHTML = "<h3>Id tidak ditemukan</h3>";
+    return;
+  }
+
+  try {
+    const data = await getUserId(id);
+    const result = `
+    <h3>${data.name}</h3>
+    <p>Email : ${data.email}</p>
+    <p>Address : ${data.address.street},${data.address.city}</p>
+    `;
+
+    userDetail.innerHTML = result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+if (listContent) {
+  getUsersData();
+}
+
+if (userDetail) {
+  getUserWithId();
+}

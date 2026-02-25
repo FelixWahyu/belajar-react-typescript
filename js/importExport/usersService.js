@@ -16,5 +16,17 @@ export const methodUsers = () => {
     return users;
   };
 
-  return { getAllUsers };
+  const getUserId = async (id) => {
+    const response = await fetch(`${baseApiUrl}/users/${id}`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user id status :${response.status}`);
+    }
+
+    const user = await response.json();
+
+    return user;
+  };
+
+  return { getAllUsers, getUserId };
 };
