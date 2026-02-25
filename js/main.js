@@ -37,8 +37,6 @@ btnFilterSelesai.addEventListener("click", filterSelesai);
 btnFilterBelum.addEventListener("click", filterBelum);
 btnSemua.addEventListener("click", () => render());
 
-selesaikan(1);
-
 // newPromise();
 // createArrayMethod();
 

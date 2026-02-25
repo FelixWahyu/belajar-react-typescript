@@ -19,7 +19,10 @@ export const domHtml = () => {
   const render = (data = listMateri) => {
     sectionContent.innerHTML = data
       .map((materi) => {
-        return `<li>${materi.text} - ${materi.selesai ? "Selesai" : "Belum"}</li>`;
+        return `<li>
+        ${materi.text} - ${materi.selesai ? "Selesai" : "Belum"}
+        <button data-id="${materi.id}" class="btn-selesai">Tandai Selesai</button>
+        </li>`;
       })
       .join("");
   };
@@ -37,7 +40,14 @@ export const domHtml = () => {
     render();
   };
 
-  form?.addEventListener("submit", addList);
+  form.addEventListener("submit", addList);
+
+  sectionContent.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn-selesai")) {
+      const id = Number(e.target.dataset.id);
+      selesaikan(id);
+    }
+  });
 
   const selesaikan = (id) => {
     listMateri = listMateri.map((todo) => (todo.id === id ? { ...todo, selesai: true } : todo));
