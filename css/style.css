@@ -55,3 +55,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.details {
+  margin: 1.5rem 0 1.5rem 0;
+}
+
+.detail-user {
+  margin: 0 0 1.5rem 0;
+}

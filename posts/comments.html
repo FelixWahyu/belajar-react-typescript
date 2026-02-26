@@ -3,30 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="../css/style.css" />
     <title>Belajar React TypeScript</title>
   </head>
   <body>
-    <section class="section-users">
-      <a href="/users/users.html"><< Kembali</a>
-
-      <div class="details">
-        <h2 class="post-title">Detail User</h2>
-        <p class="post-subtitle">Berikut detail user</p>
+    <nav class="navbar">
+      <div>
+        <h3>Belajar React</h3>
       </div>
-      <div id="user-detail" class="detail-user"></div>
-
+      <div>
+        <a href="/index.html">Beranda</a>
+        <a href="/users/users.html">Users</a>
+      </div>
+    </nav>
+    <section class="section-users">
       <div>
         <h2 class="post-title">Daftar Posts</h2>
-        <p class="post-subtitle">Berikut adalah daftar Posts dari user</p>
+        <p class="post-subtitle">Berikut adalah daftar Posts</p>
       </div>
 
       <div class="list">
         <ol id="content-posts" class="list-item"></ol>
       </div>
     </section>
-
-    <script type="module" src="../js/index.js"></script>
     <script type="module" src="../js/posts.js"></script>
   </body>
 </html>
