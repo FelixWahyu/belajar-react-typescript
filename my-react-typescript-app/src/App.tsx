@@ -18,7 +18,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <main className="min-h-screen flex justify-center items-center">
-      <RouterProvider router={router} />,
+      <RouterProvider router={router} />
     </main>
   );
 }
