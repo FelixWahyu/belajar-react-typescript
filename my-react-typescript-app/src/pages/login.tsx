@@ -1,6 +1,6 @@
 import LoginPage from "../components/Login";
 
-const IndexPage = () => {
+const Login = () => {
   return (
     <>
       <LoginPage />
@@ -8,4 +8,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default Login;
