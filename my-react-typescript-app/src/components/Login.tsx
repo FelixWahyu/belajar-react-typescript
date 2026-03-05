@@ -21,8 +21,8 @@ const validate = (values: FormLogin): ErrorsMsg => {
 
   if (!values.password) {
     errors.password = "Password wajib diisi!";
-  } else if (values.password.length < 6) {
-    errors.password = "Password minimal 6 karakter!";
+  } else if (values.password.length < 8) {
+    errors.password = "Password minimal 8 karakter!";
   }
 
   return errors;
@@ -83,7 +83,7 @@ const LoginPage = () => {
           <button type="submit" className="px-4 py-2 mb-8 w-full border-none bg-blue-600 text-white font-medium cursor-pointer hover:bg-blue-700 hover:scale-105 transition-all duration-300">
             Login
           </button>
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 text-center text-sm">
             Belum memiliki akun?{" "}
             <Link to={"/register"} className="text-blue-500 font-medium">
               Register

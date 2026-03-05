@@ -40,8 +40,8 @@ const validation = (errorsMsg: FormRegister): ErrorMessage => {
 
   if (!errorsMsg.password) {
     errors.password = "Password wajib diisi!";
-  } else if (errorsMsg.password.length < 6) {
-    errors.password = "Password minimal 6 karakter!";
+  } else if (errorsMsg.password.length < 8) {
+    errors.password = "Password minimal 8 karakter!";
   }
 
   if (!errorsMsg.confirmPassword) {
@@ -63,7 +63,14 @@ const RegisterPage = () => {
     confirmPassword: "",
   });
 
-  console.log(user);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const newValues = { ...user, [name]: value };
+    setUser(newValues);
+
+    const newErrors = validation(newValues);
+    setErrors({ ...errors, [name]: newErrors[name as keyof FormRegister] });
+  };
 
   const handleSubmited = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -97,42 +104,21 @@ const RegisterPage = () => {
             <label htmlFor="nama" className="block text-sm font-medium text-gray-700">
               Nama Lengkap
             </label>
-            <input
-              type="text"
-              id="nama"
-              name="nama"
-              onChange={(e) => setUser({ ...user, nama: e.target.value })}
-              value={user.nama}
-              className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600"
-            />
+            <input type="text" id="nama" name="nama" onChange={handleChange} value={user.nama} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
             {errors.nama && <p className="text-red-500 text-xs mt-1">{errors.nama}</p>}
           </div>
           <div className="mb-4">
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">
               Username
             </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
-              value={user.username}
-              className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600"
-            />
+            <input type="text" id="username" name="username" onChange={handleChange} value={user.username} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
             {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username}</p>}
           </div>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email
             </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
-              value={user.email}
-              className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600"
-            />
+            <input type="email" id="email" name="email" onChange={handleChange} value={user.email} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
           <div className="mb-4">
@@ -143,7 +129,7 @@ const RegisterPage = () => {
               type="password"
               id="password"
               name="password"
-              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              onChange={handleChange}
               value={user.password}
               className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600"
             />
@@ -157,7 +143,7 @@ const RegisterPage = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
-              onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
+              onChange={handleChange}
               value={user.confirmPassword}
               className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600"
             />
@@ -167,7 +153,7 @@ const RegisterPage = () => {
           <button type="submit" className="px-4 py-2 mb-8 w-full border-none bg-blue-600 text-white font-medium cursor-pointer hover:bg-blue-700 hover:scale-105 transition-all duration-300">
             Register
           </button>
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 text-center text-sm">
             Sudah memiliki akun?{" "}
             <Link to={"/"} className="text-blue-500 font-medium">
               Login
