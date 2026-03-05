@@ -93,8 +93,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <section className="max-w-sm mx-auto">
-      <div className="p-4">
+    <section className="h-screen flex justify-center items-center">
+      <div className="max-w-sm p-4">
         <div className="mb-6">
           <h3 className="text-3xl font-semibold mb-4">Register</h3>
           <p className="text-sm text-gray-600">Silahkan registrasi untuk membuat akun baru</p>

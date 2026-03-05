@@ -58,8 +58,8 @@ const LoginPage = () => {
   };
 
   return (
-    <section className="max-w-sm mx-auto">
-      <div className="p-4">
+    <section className="flex items-center justify-center h-screen">
+      <div className="max-w-sm p-4">
         <div className="mb-6">
           <h3 className="text-3xl font-semibold mb-4">Login</h3>
           <p className="text-sm text-gray-600">Silahkan login dengan akun yang terdaftar</p>
