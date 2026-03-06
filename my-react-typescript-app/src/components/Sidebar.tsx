@@ -1,22 +1,20 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { LayoutDashboard, Users, ShoppingCart, Package, Settings, LogOut, X } from "lucide-react";
 
 const navItems = [
-  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { id: "users", label: "Users", icon: Users },
-  { id: "orders", label: "Orders", icon: ShoppingCart },
-  { id: "products", label: "Products", icon: Package },
-  { id: "settings", label: "Settings", icon: Settings },
+  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
+  { id: "users", label: "Users", icon: Users, path: "/users" },
+  { id: "orders", label: "Orders", icon: ShoppingCart, path: "/orders" },
+  { id: "products", label: "Products", icon: Package, path: "/products" },
+  { id: "settings", label: "Settings", icon: Settings, path: "/settings" },
 ];
 
 interface SidebarProps {
-  activeMenu: string;
-  onNavClick: (id: string) => void;
   onClose: () => void;
   isOpen: boolean;
 }
 
-const Sidebar = ({ activeMenu, onNavClick, onClose, isOpen }: SidebarProps) => {
+const Sidebar = ({ onClose, isOpen }: SidebarProps) => {
   return (
     <aside
       className={`fixed top-0 left-0 bottom-0 w-56 bg-neutral-950 flex flex-col z-30 transition-transform duration-300
@@ -36,15 +34,22 @@ const Sidebar = ({ activeMenu, onNavClick, onClose, isOpen }: SidebarProps) => {
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
-            <button
+            <NavLink
               key={item.id}
-              onClick={() => onNavClick(item.id)}
-              className={`flex items-center gap-2.5 w-full text-left px-3 py-2.5 rounded-lg text-sm transition-colors duration-150 border-none cursor-pointer
-                ${activeMenu === item.id ? "bg-neutral-800 text-white font-medium" : "bg-transparent text-neutral-500 hover:bg-neutral-800/60 hover:text-neutral-300"}`}
+              to={item.path}
+              onClick={onClose}
+              className={({ isActive }) =>
+                `flex items-center gap-2.5 w-full px-3 py-2.5 rounded-lg text-sm transition-colors duration-150
+                ${isActive ? "bg-neutral-800 text-white font-medium" : "text-neutral-500 hover:bg-neutral-800/60 hover:text-neutral-300"}`
+              }
             >
-              <Icon size={15} className={activeMenu === item.id ? "text-indigo-400" : "opacity-50"} />
-              {item.label}
-            </button>
+              {({ isActive }) => (
+                <>
+                  <Icon size={15} className={isActive ? "text-indigo-400" : "opacity-50"} />
+                  {item.label}
+                </>
+              )}
+            </NavLink>
           );
         })}
       </nav>
