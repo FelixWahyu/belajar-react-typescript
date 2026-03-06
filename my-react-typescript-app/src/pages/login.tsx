@@ -1,9 +1,12 @@
 import LoginPage from "../components/Login";
+import GuestLayout from "../layouts/GuestLayout";
 
 const Login = () => {
   return (
     <>
-      <LoginPage />
+      <GuestLayout>
+        <LoginPage />
+      </GuestLayout>
     </>
   );
 };
