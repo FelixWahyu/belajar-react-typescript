@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
+import { Outlet } from "react-router";
 
-interface GuestLayoutProps {
-  children: ReactNode;
-}
-
-const GuestLayout = ({ children }: GuestLayoutProps) => {
-  return <main className="min-h-screen">{children}</main>;
+const GuestLayout = () => {
+  return (
+    <main className="min-h-screen">
+      <Outlet />
+    </main>
+  );
 };
 
 export default GuestLayout;

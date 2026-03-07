@@ -1,5 +1,4 @@
 import { Users2, DollarSign, ClipboardList, Boxes } from "lucide-react";
-import MainLayout from "../layouts/MainLayout";
 import { Link } from "react-router";
 import { useMemo } from "react";
 
@@ -29,7 +28,7 @@ const DashboardPage = () => {
   const formatDate = useMemo(() => new Date().toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" }), []);
 
   return (
-    <MainLayout>
+    <section>
       <header className="flex items-end justify-between mb-6 lg:mb-9">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight leading-none">Dashboard</h1>
@@ -94,7 +93,7 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
-    </MainLayout>
+    </section>
   );
 };
 

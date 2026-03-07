@@ -58,7 +58,7 @@ const LoginPage = () => {
   };
 
   return (
-    <section className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen">
       <div className="max-w-sm p-4">
         <div className="mb-6">
           <h3 className="text-3xl font-semibold mb-4">Login</h3>
@@ -91,7 +91,7 @@ const LoginPage = () => {
           </p>
         </form>
       </div>
-    </section>
+    </div>
   );
 };
 

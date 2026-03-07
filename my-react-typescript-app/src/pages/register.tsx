@@ -1,12 +1,11 @@
 import RegisterPage from "../components/Register";
-import GuestLayout from "../layouts/GuestLayout";
 
 const Register = () => {
   return (
     <>
-      <GuestLayout>
+      <section>
         <RegisterPage />
-      </GuestLayout>
+      </section>
     </>
   );
 };

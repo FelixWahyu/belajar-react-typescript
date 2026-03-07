@@ -1,12 +1,11 @@
 import LoginPage from "../components/Login";
-import GuestLayout from "../layouts/GuestLayout";
 
 const Login = () => {
   return (
     <>
-      <GuestLayout>
+      <section>
         <LoginPage />
-      </GuestLayout>
+      </section>
     </>
   );
 };

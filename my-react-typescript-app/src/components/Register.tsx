@@ -93,7 +93,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <section className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center">
       <div className="max-w-sm p-4">
         <div className="mb-6">
           <h3 className="text-3xl font-semibold mb-4">Register</h3>
@@ -161,7 +161,7 @@ const RegisterPage = () => {
           </p>
         </form>
       </div>
-    </section>
+    </div>
   );
 };
 
