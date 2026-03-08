@@ -1,16 +1,17 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
-import Login from "./pages/login";
-import Register from "./pages/register";
+import Login from "./pages/auth/login";
+import Register from "./pages/auth/register";
 import Dashboard from "./pages/dashboard";
 import PageNotFound from "./pages/404";
-import Users from "./pages/users";
+import Users from "./pages/users/users";
 import MainLayout from "./layouts/MainLayout";
 import GuestLayout from "./layouts/GuestLayout";
-import Orders from "./pages/orders";
+import Orders from "./pages/orders/orders";
 import Products from "./pages/products/productsIndex";
 import Settings from "./pages/settings";
 import Details from "./pages/products/details";
+import Create from "./pages/products/create";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="users" element={<Users />} />
         <Route path="orders" element={<Orders />} />
         <Route path="products" element={<Products />} />
+        <Route path="create" element={<Create />} />
         <Route path="products/:itemId" element={<Details />} />
         <Route path="settings" element={<Settings />} />
       </Route>
