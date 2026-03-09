@@ -46,6 +46,8 @@ const CreateProduct = () => {
 
     if (!form.category) {
       newErrors.category = "Wajib pilih kategori produk!";
+    } else if (form.category.length < 3) {
+      newErrors.category = "Nama kategori minimal 3 karakter!";
     }
 
     if (form.price === "" || form.price <= 0) {

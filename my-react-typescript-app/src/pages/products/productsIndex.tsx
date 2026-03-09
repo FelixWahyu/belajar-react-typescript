@@ -5,7 +5,7 @@ const ProductPage = () => {
     <section className="bg-white rounded-lg shadow-sm p-6">
       <div className="px-6 py-2 flex justify-between items-center mb-6">
         <h3 className="text-xl text-gray-800 font-semibold">Halaman Product</h3>
-        <Link to={"/dashboard/create"} className="px-4 py-1 flex items-center justify-center rounded-lg bg-blue-500 text-white hover:bg-blue-600">
+        <Link to={"/dashboard/create-product"} className="px-4 py-1 flex items-center justify-center rounded-lg bg-blue-500 text-white hover:bg-blue-600">
           + Tambah
         </Link>
       </div>

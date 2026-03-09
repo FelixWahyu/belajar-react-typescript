@@ -1,9 +1,10 @@
 import { Link, NavLink } from "react-router";
-import { LayoutDashboard, Users, ShoppingCart, Package, Settings, LogOut, X } from "lucide-react";
+import { LayoutDashboard, Users, Folder, ShoppingCart, Package, Settings, LogOut, X } from "lucide-react";
 
 const navItems = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, path: "/dashboard", exact: true },
   { id: "users", label: "Users", icon: Users, path: "/dashboard/users" },
+  { id: "categories", label: "Categories", icon: Folder, path: "/dashboard/category" },
   { id: "orders", label: "Orders", icon: ShoppingCart, path: "/dashboard/orders" },
   { id: "products", label: "Products", icon: Package, path: "/dashboard/products" },
   { id: "settings", label: "Settings", icon: Settings, path: "/dashboard/settings" },

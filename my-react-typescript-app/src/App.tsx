@@ -10,8 +10,10 @@ import GuestLayout from "./layouts/GuestLayout";
 import Orders from "./pages/orders/orders";
 import Products from "./pages/products/productsIndex";
 import Settings from "./pages/settings";
+import Categories from "./pages/categories/categoriesIndex";
 import Details from "./pages/products/details";
 import Create from "./pages/products/create";
+import CreateCategory from "./pages/categories/createPage";
 
 function App() {
   return (
@@ -25,8 +27,10 @@ function App() {
         <Route index element={<Dashboard />} />
         <Route path="users" element={<Users />} />
         <Route path="orders" element={<Orders />} />
+        <Route path="category" element={<Categories />} />
+        <Route path="create-category" element={<CreateCategory />} />
         <Route path="products" element={<Products />} />
-        <Route path="create" element={<Create />} />
+        <Route path="create-product" element={<Create />} />
         <Route path="products/:itemId" element={<Details />} />
         <Route path="settings" element={<Settings />} />
       </Route>
