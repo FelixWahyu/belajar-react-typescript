@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useState, FormEvent } from "react";
+import { useNavigate, Link } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
+import { AxiosError } from "axios";
 
 type FormRegister = {
-  nama: string;
+  name: string;
   username: string;
   email: string;
   password: string;
@@ -16,12 +18,12 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const validation = (errorsMsg: FormRegister): ErrorMessage => {
   const errors: ErrorMessage = {};
 
-  if (!errorsMsg.nama) {
-    errors.nama = "Nama lengkap wajib diisi!";
-  } else if (errorsMsg.nama.length < 3) {
-    errors.nama = "Nama lengkap minimal 3 karakter!";
-  } else if (errorsMsg.nama.length > 50) {
-    errors.nama = "Nama lengkap maksimal 50 karakter!";
+  if (!errorsMsg.name) {
+    errors.name = "Nama lengkap wajib diisi!";
+  } else if (errorsMsg.name.length < 3) {
+    errors.name = "Nama lengkap minimal 3 karakter!";
+  } else if (errorsMsg.name.length > 50) {
+    errors.name = "Nama lengkap maksimal 50 karakter!";
   }
 
   if (!errorsMsg.username) {
@@ -54,42 +56,52 @@ const validation = (errorsMsg: FormRegister): ErrorMessage => {
 };
 
 const RegisterPage = () => {
+  const { register } = useAuth();
+  const navigate = useNavigate();
   const [errors, setErrors] = useState<ErrorMessage>({});
-  const [user, setUser] = useState<FormRegister>({
-    nama: "",
+  const [form, setForm] = useState<FormRegister>({
+    name: "",
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    const newValues = { ...user, [name]: value };
-    setUser(newValues);
+    const newValues = { ...form, [name]: value };
+    setForm(newValues);
 
     const newErrors = validation(newValues);
     setErrors({ ...errors, [name]: newErrors[name as keyof FormRegister] });
   };
 
-  const handleSubmited = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmited = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const formData = new FormData(e.currentTarget);
-    // const nama = formData.get("nama") as string;
-    // const username = formData.get("username") as string;
-    // const email = formData.get("email") as string;
-    // const password = formData.get("password") as string;
-    // const confirmPassword = formData.get("confirm_password") as string;
-
-    const validateError = validation(user);
-
+    const validateError = validation(form);
     if (Object.keys(validateError).length > 0) {
       setErrors(validateError);
       return;
     }
+    setIsLoading(true);
 
-    setErrors({});
-    console.log(user);
+    try {
+      const { confirmPassword, ...registerDto } = form;
+
+      await register(registerDto);
+      navigate("/", {
+        state: { message: "Registrasi berhasil! Silakan login." },
+      });
+
+      setErrors({});
+    } catch (err) {
+      const axiosError = err as AxiosError<{ message: string }>;
+      setApiError(axiosError.response?.data?.message || "Registrasi gagal, coba lagi");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -99,26 +111,28 @@ const RegisterPage = () => {
           <h3 className="text-3xl font-semibold mb-4">Register</h3>
           <p className="text-sm text-gray-600">Silahkan registrasi untuk membuat akun baru</p>
         </div>
+
+        {apiError && <div className="text-red-500 text-sm mb-4 p-2 bg-red-50 rounded-lg">{apiError}</div>}
         <form onSubmit={handleSubmited}>
           <div className="mb-4">
-            <label htmlFor="nama" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Nama Lengkap
             </label>
-            <input type="text" id="nama" name="nama" onChange={handleChange} value={user.nama} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
-            {errors.nama && <p className="text-red-500 text-xs mt-1">{errors.nama}</p>}
+            <input type="text" id="name" name="name" onChange={handleChange} value={form.name} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
+            {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
           </div>
           <div className="mb-4">
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">
               Username
             </label>
-            <input type="text" id="username" name="username" onChange={handleChange} value={user.username} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
+            <input type="text" id="username" name="username" onChange={handleChange} value={form.username} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
             {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username}</p>}
           </div>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email
             </label>
-            <input type="email" id="email" name="email" onChange={handleChange} value={user.email} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
+            <input type="email" id="email" name="email" onChange={handleChange} value={form.email} className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600" />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
           <div className="mb-4">
@@ -130,7 +144,7 @@ const RegisterPage = () => {
               id="password"
               name="password"
               onChange={handleChange}
-              value={user.password}
+              value={form.password}
               className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600"
             />
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
@@ -144,14 +158,14 @@ const RegisterPage = () => {
               id="confirmPassword"
               name="confirmPassword"
               onChange={handleChange}
-              value={user.confirmPassword}
+              value={form.confirmPassword}
               className="px-3 py-1.5 mt-1 w-full border border-gray-300 rounded-lg focus:outline-1 focus:outline-blue-600 focus:border-blue-600"
             />
             {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
           </div>
 
-          <button type="submit" className="px-4 py-2 mb-8 w-full border-none bg-blue-600 text-white font-medium cursor-pointer hover:bg-blue-700 hover:scale-105 transition-all duration-300">
-            Register
+          <button type="submit" disabled={isLoading} className="px-4 py-2 mb-8 w-full border-none bg-blue-600 text-white font-medium cursor-pointer hover:bg-blue-700 hover:scale-105 transition-all duration-300">
+            {isLoading ? "Loading..." : "Daftar"}
           </button>
           <p className="text-gray-600 text-center text-sm">
             Sudah memiliki akun?{" "}

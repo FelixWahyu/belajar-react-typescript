@@ -1,4 +1,5 @@
-import { Link, NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 import { LayoutDashboard, Users, Folder, ShoppingCart, Package, Settings, LogOut, X } from "lucide-react";
 
 const navItems = [
@@ -17,6 +18,14 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ onClose, isOpen, namaBisnis }: SidebarProps) => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
+
   return (
     <aside
       className={`fixed top-0 left-0 bottom-0 w-56 bg-neutral-950 flex flex-col z-30 transition-transform duration-300
@@ -54,12 +63,15 @@ const Sidebar = ({ onClose, isOpen, namaBisnis }: SidebarProps) => {
       <div className="px-3 pt-4 pb-5 border-t border-neutral-800/60">
         <div className="flex items-center gap-2.5 bg-neutral-900 rounded-lg px-3 py-2.5">
           <div className="w-7 h-7 rounded-full bg-linear-to-br from-indigo-500 to-indigo-300 flex items-center justify-center text-white text-xs font-bold shrink-0">EX</div>
-          <p className="text-neutral-500 text-xs truncate">example@gmail.com</p>
+          <p className="text-neutral-500 text-xs truncate">{user?.email}</p>
         </div>
-        <Link to="/" className="flex items-center justify-center gap-1.5 mt-2 text-xs font-medium text-neutral-600 hover:text-red-400 hover:bg-red-400/5 rounded-md py-2 transition-colors duration-150 no-underline">
+        <button
+          onClick={handleLogout}
+          className="flex items-center w-full cursor-pointer justify-center gap-1.5 mt-2 text-xs font-medium text-neutral-600 hover:text-red-400 hover:bg-red-400/5 rounded-md py-2 transition-colors duration-150 no-underline"
+        >
           <LogOut size={13} />
           Keluar
-        </Link>
+        </button>
       </div>
     </aside>
   );

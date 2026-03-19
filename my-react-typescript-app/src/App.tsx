@@ -1,5 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import Dashboard from "./pages/dashboard";
@@ -17,25 +19,29 @@ import CreateCategory from "./pages/categories/createPage";
 
 function App() {
   return (
-    <Routes>
-      <Route element={<GuestLayout />}>
-        <Route index element={<Login />} />
-        <Route path="register" element={<Register />} />
-      </Route>
+    <AuthProvider>
+      <Routes>
+        <Route element={<GuestLayout />}>
+          <Route index element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
 
-      <Route path="dashboard" element={<MainLayout namaBisnis="Toko Sembako" />}>
-        <Route index element={<Dashboard />} />
-        <Route path="users" element={<Users />} />
-        <Route path="orders" element={<Orders />} />
-        <Route path="category" element={<Categories />} />
-        <Route path="create-category" element={<CreateCategory />} />
-        <Route path="products" element={<Products />} />
-        <Route path="create-product" element={<Create />} />
-        <Route path="products/:itemId" element={<Details />} />
-        <Route path="settings" element={<Settings />} />
-      </Route>
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+        <Route element={<ProtectedRoute />}>
+          <Route path="dashboard" element={<MainLayout namaBisnis="Toko Sembako" />}>
+            <Route index element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="category" element={<Categories />} />
+            <Route path="create-category" element={<CreateCategory />} />
+            <Route path="products" element={<Products />} />
+            <Route path="create-product" element={<Create />} />
+            <Route path="products/:itemId" element={<Details />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 
