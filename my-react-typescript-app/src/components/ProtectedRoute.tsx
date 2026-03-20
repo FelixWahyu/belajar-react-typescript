@@ -11,7 +11,7 @@ export const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
 
   // Tunggu sampai auth selesai dicek
   if (isLoading) {
-    return <div style={{ display: "grid", placeItems: "center", height: "100vh" }}>Loading...</div>;
+    return <div className="grid items-center justify-center h-screen">Loading...</div>;
   }
 
   // Belum login → redirect ke login, simpan halaman asal

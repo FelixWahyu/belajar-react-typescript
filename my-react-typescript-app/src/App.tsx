@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./providers/authProvider";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
