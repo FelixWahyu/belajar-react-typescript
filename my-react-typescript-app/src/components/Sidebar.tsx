@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import { LayoutDashboard, Users, Folder, ShoppingCart, Package, Settings, LogOut, X } from "lucide-react";
 
 const navItems = [

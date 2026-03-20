@@ -1,6 +1,6 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import { AxiosError } from "axios";
 
 type FormRegister = {
@@ -88,7 +88,7 @@ const RegisterPage = () => {
     setIsLoading(true);
 
     try {
-      const { confirmPassword, ...registerDto } = form;
+      const { confirmPassword: _, ...registerDto } = form;
 
       await register(registerDto);
       navigate("/", {

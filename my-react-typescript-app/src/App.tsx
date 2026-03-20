@@ -23,11 +23,11 @@ function App() {
       <Routes>
         <Route element={<GuestLayout />}>
           <Route index element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path="/register" element={<Register />} />
         </Route>
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="dashboard" element={<MainLayout namaBisnis="Toko Sembako" />}>
+        <Route element={<ProtectedRoute requiredRole="ADMIN" />}>
+          <Route path="/dashboard" element={<MainLayout namaBisnis="Toko Sembako" />}>
             <Route index element={<Dashboard />} />
             <Route path="users" element={<Users />} />
             <Route path="orders" element={<Orders />} />
